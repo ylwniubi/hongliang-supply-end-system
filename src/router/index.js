@@ -29,6 +29,7 @@ const router = createRouter({
       path: '/',
       name: 'main',
       component: Main,
+      redirect:'home',
       meta: {
         noAuth: false
       },
