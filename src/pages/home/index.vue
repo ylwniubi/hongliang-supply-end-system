@@ -1,49 +1,120 @@
-<script setup>
-import zhe from './zhe.vue'
-import bar from './bar.vue'
-// import Line from './line.vue'
-import pie from './pie.vue'
-import Map from './map.vue'
-</script>
 <template>
-  <div class="content">
-    <div class="rol">
-      <div class="row">
-        <zhe></zhe>
+  <div class="mess">
+    <div class="head">
+      <div class="shijian">
+        <span class="change">对比时间段:</span>
+        <div class="demo-time-range">
+          <el-date-picker v-model="value2" type="daterange" start-placeholder="开始时间"
+                          end-placeholder="结束时间" :default-value="[new Date(2010, 9, 1), new Date(2010, 10, 1)]" />
+        </div>
       </div>
-      <div class="row">
-        <Map></Map>
+      <div>
+        <el-select v-model="selectedValue" placeholder="请选择时间">
+          <el-option v-for="option in options1" :key="option.value" :label="option.label" :value="option.value"></el-option>
+        </el-select>
       </div>
+      <div>平均重量:</div>
     </div>
-    <div class="rol">
-      <div class="row">
-        <pie></pie>
+    <v-chart :option="option" class="zhe"></v-chart>
+    <div class="foot">
+      <div class="shijian">
+        <span class="change">对比时间段:</span>
+        <div class="demo-time-range">
+          <el-date-picker v-model="value2" type="daterange" start-placeholder="开始时间" end-placeholder="结束时间"
+                          :default-value="[new Date(2010, 9, 1), new Date(2010, 10, 1)]" />
+        </div>
       </div>
-      <div class="row">
-        <bar></bar>
+      <div>
+        <el-select v-model="selectedValue" placeholder="请选择时间">
+          <el-option v-for="option in options1" :key="option.value" :label="option.label" :value="option.value"></el-option>
+        </el-select>
       </div>
+      <div>平均收购价格:</div>
     </div>
+    <v-chart :option="options" class="zhe"></v-chart>
   </div>
 </template>
+<script setup>
+import { ref } from 'vue'
+
+const value2 = ref('')
+const value1 = ref('')
+const selectedValue = ref('')
+const option = {
+  xAxis: {
+    name: '时间/天',
+    type: 'category',
+    // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  yAxis: {
+    name: '红梁/斤',
+    type: 'value'
+  },
+  series: [
+    {
+      data: [150, 230, 224, 218, 135, 147, 260],
+      type: 'line'
+    }
+  ]
+}
+
+const options = {
+  xAxis: {
+    name: '时间/天',
+    type: 'category',
+    // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  yAxis: {
+    name: '价格/元',
+    type: 'value'
+  },
+  series: [
+    {
+      data: [150, 230, 224, 218, 135, 147, 260],
+      type: 'line'
+    }
+  ]
+}
+
+const options1 = [
+  { value: 'option1', label: '2个月' },
+  { value: 'option2', label: '4个月' },
+  { value: 'option3', label: '6个月' },
+]
+
+</script>
 
 <style lang="scss" scoped>
-.content {
-  flex: 1;
-  // background-color: pink;
-  display: flex;
+.mess {
+  h3 {
+    text-align: center;
+    color: skyblue;
+  }
 
-  .rol {
-    flex: 1;
-    // background-color: skyblue;
-    // margin: 10px;
+  .head {
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 
-    .row {
-      flex: 1;
-      // background-color: pink;
-      // margin: 10px;
+    .shijian {
+      display: flex;
+      align-items: center;
     }
   }
+  .foot {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .shijian {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.zhe {
+  // background-color: pink;
+  height: 600px;
 }
 </style>
