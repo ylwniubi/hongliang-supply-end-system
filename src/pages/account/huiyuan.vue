@@ -1,6 +1,6 @@
 <template>
     <div>
-        会员注册
+        会员注册(无原型图)
     </div>
 </template>
 

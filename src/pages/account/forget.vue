@@ -1,6 +1,6 @@
 <template>
     <div>
-        忘记密码
+        忘记密码(无原型图)
     </div>
 </template>
 

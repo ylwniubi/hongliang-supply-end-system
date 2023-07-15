@@ -1,6 +1,6 @@
 <template>
     <div>
-        会员登录
+        会员登录(无原型图)
     </div>
 </template>
 
